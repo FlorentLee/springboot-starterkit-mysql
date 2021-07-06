@@ -38,4 +38,6 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User passenger;
+
+    private int fare;
 }

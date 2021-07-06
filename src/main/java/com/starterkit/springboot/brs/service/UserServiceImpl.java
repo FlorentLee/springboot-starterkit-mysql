@@ -119,6 +119,24 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * Add value
+     *
+     * @param userDto
+     * @param newValue
+     * @return
+     */
+    @Override
+    public UserDto addValue(UserDto userDto, int newValue) {
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(userDto.getEmail()));
+        if (user.isPresent()) {
+            User userModel = user.get();
+            userModel.setAccountBalance(userModel.getAccountBalance() + newValue);
+            return UserMapper.toUserDto(userRepository.save(userModel));
+        }
+        throw exception(USER, ENTITY_NOT_FOUND, userDto.getEmail());
+    }
+
+    /**
      * Returns a new RuntimeException
      *
      * @param entityType

@@ -27,6 +27,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String mobileNumber;
+    private int accountBalance;
     private boolean isAdmin;
     private Collection<RoleDto> roles;
 

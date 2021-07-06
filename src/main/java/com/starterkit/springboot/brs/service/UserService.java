@@ -37,4 +37,6 @@ public interface UserService {
      * @return
      */
     UserDto changePassword(UserDto userDto, String newPassword);
+
+    UserDto addValue(UserDto userDto, int newValue);
 }

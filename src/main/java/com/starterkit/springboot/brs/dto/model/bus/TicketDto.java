@@ -26,6 +26,8 @@ public class TicketDto {
 
     private int seatNumber;
 
+    private int fare;
+
     private boolean cancellable;
 
     private String journeyDate;

@@ -334,19 +334,31 @@ public class BusReservationServiceImpl implements BusReservationService {
     @Override
     @Transactional
     public TicketDto bookTicket(TripScheduleDto tripScheduleDto, UserDto userDto) {
-        User user = getUser(userDto.getEmail());
+        User user = userRepository.findByEmail(userDto.getEmail());
         if (user != null) {
             Optional<TripSchedule> tripSchedule = tripScheduleRepository.findById(tripScheduleDto.getId());
             if (tripSchedule.isPresent()) {
+                tripSchedule.get().setAvailableSeats(tripSchedule.get().getAvailableSeats() - 1);
+                if(tripSchedule.get().getAvailableSeats() < 0){
+                    throw exception(TRIPSCHEDULE, ENTITY_EXCEPTION, "");
+                }
+                tripScheduleRepository.save(tripSchedule.get());
+
+                user.setAccountBalance(user.getAccountBalance() - tripSchedule.get().getTripDetail().getFare());
+                if(user.getAccountBalance() < 0){
+                    throw exception(USER, ENTITY_EXCEPTION, "");
+                }
+                userRepository.save(user);
+
                 Ticket ticket = new Ticket()
                         .setCancellable(false)
                         .setJourneyDate(tripSchedule.get().getTripDate())
                         .setPassenger(user)
                         .setTripSchedule(tripSchedule.get())
-                        .setSeatNumber(tripSchedule.get().getTripDetail().getBus().getCapacity() - tripSchedule.get().getAvailableSeats());
+                        .setSeatNumber(tripSchedule.get().getTripDetail().getBus().getCapacity() - tripSchedule.get().getAvailableSeats())
+                        .setFare(tripSchedule.get().getTripDetail().getFare());
                 ticketRepository.save(ticket);
-                tripSchedule.get().setAvailableSeats(tripSchedule.get().getAvailableSeats() - 1); //reduce availability by 1
-                tripScheduleRepository.save(tripSchedule.get());//update schedule
+
                 return TicketMapper.toTicketDto(ticket);
             }
             throw exceptionWithId(TRIP, ENTITY_NOT_FOUND, 2, tripScheduleDto.getTripId().toString(), tripScheduleDto.getTripDate());
