@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Created by Arpit Khandelwal.
@@ -22,7 +23,8 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int fare;
+    @Column(name = "journey_fare")
+    private BigDecimal fare;
 
     @Column(name = "journey_time")
     private int journeyTime;

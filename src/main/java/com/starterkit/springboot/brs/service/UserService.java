@@ -2,9 +2,9 @@ package com.starterkit.springboot.brs.service;
 
 import com.starterkit.springboot.brs.dto.model.user.UserDto;
 
-/**
- * Created by Arpit Khandelwal.
- */
+import java.math.BigDecimal;
+
+
 public interface UserService {
     /**
      * Register a new user
@@ -38,5 +38,5 @@ public interface UserService {
      */
     UserDto changePassword(UserDto userDto, String newPassword);
 
-    UserDto addValue(UserDto userDto, int newValue);
+    UserDto addValue(UserDto userDto, BigDecimal newValue);
 }

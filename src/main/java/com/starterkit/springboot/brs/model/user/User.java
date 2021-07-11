@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public class User {
     @Column(name = "mobile_number")
     private String mobileNumber;
 
-    private int accountBalance;
+    private BigDecimal accountBalance;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",

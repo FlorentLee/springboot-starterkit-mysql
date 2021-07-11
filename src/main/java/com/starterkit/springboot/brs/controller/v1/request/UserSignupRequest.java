@@ -8,9 +8,7 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotEmpty;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Getter
 @Setter
 @Accessors(chain = true)

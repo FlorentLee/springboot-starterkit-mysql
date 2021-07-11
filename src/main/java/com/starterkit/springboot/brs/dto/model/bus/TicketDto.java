@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
+
 
 /**
  * Created by Arpit Khandelwal.
@@ -26,7 +28,7 @@ public class TicketDto {
 
     private int seatNumber;
 
-    private int fare;
+    private BigDecimal fare;
 
     private boolean cancellable;
 

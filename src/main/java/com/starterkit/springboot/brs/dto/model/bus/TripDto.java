@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Arpit Khandelwal.
  */
@@ -22,7 +24,7 @@ public class TripDto {
 
     private Long id;
 
-    private int fare;
+    private BigDecimal fare;
 
     private int journeyTime;
 

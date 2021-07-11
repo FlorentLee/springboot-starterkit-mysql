@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
+
 
 /**
  * Created by Arpit Khandelwal.
@@ -29,7 +31,7 @@ public class TripScheduleDto {
 
     private int availableSeats;
 
-    private int fare;
+    private BigDecimal fare;
 
     private int journeyTime;
 

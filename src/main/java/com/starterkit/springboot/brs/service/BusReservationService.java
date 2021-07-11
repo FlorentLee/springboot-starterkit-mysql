@@ -6,9 +6,7 @@ import com.starterkit.springboot.brs.dto.model.user.UserDto;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 public interface BusReservationService {
 
     //Stop related methods

@@ -1,5 +1,6 @@
 package com.starterkit.springboot.brs.controller.v1.api;
 
+import com.starterkit.springboot.brs.controller.v1.request.AddValueRequest;
 import com.starterkit.springboot.brs.controller.v1.request.BookTicketRequest;
 import com.starterkit.springboot.brs.controller.v1.request.GetTripSchedulesRequest;
 import com.starterkit.springboot.brs.dto.model.bus.TicketDto;
@@ -19,12 +20,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @RestController
 @RequestMapping("/api/v1/reservation")
 @Api(value = "brs-application", description = "Operations pertaining to agency management and ticket issue in the BRS application")
@@ -91,6 +91,18 @@ public class BusReservationController {
                 }
             }
         }
-        return Response.badRequest().setErrors("Unable to process ticket booking.");
+        return Response.badRequest().setErrors("Failed to book your ticket.");
+    }
+
+    @PostMapping(value = "/payment")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public Response addValue(@RequestBody @Valid AddValueRequest addValueRequest) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = (String) auth.getPrincipal();
+        Optional<UserDto> userDto = Optional.ofNullable(userService.findUserByEmail(email));
+        if (userDto.isPresent()) {
+            return Response.ok().setPayload(userService.addValue(userDto.get(), addValueRequest.getNewValue()));
+        }
+        return Response.badRequest().setErrors("Failed to add value in your account.");
     }
 }

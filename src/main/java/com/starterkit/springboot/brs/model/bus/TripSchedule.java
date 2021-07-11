@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -32,6 +33,9 @@ public class TripSchedule {
 
     @Column(name = "trip_date")
     private String tripDate;
+
+    @Column(name = "trip_fare")
+    private BigDecimal fare;
 
     @Column(name = "available_seats")
     private int availableSeats;

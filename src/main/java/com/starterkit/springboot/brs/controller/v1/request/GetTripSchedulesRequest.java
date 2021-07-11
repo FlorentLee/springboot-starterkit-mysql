@@ -12,9 +12,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Getter
 @Setter
 @Accessors(chain = true)

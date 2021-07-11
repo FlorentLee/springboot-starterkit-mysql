@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -24,9 +25,7 @@ import static com.starterkit.springboot.brs.exception.EntityType.USER;
 import static com.starterkit.springboot.brs.exception.ExceptionType.DUPLICATE_ENTITY;
 import static com.starterkit.springboot.brs.exception.ExceptionType.ENTITY_NOT_FOUND;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Component
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -126,12 +125,11 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserDto addValue(UserDto userDto, int newValue) {
+    public UserDto addValue(UserDto userDto, BigDecimal newValue) {
         Optional<User> user = Optional.ofNullable(userRepository.findByEmail(userDto.getEmail()));
         if (user.isPresent()) {
-            User userModel = user.get();
-            userModel.setAccountBalance(userModel.getAccountBalance() + newValue);
-            return UserMapper.toUserDto(userRepository.save(userModel));
+            user.get().setAccountBalance(user.get().getAccountBalance().add(newValue));
+            return UserMapper.toUserDto(userRepository.save(user.get()));
         }
         throw exception(USER, ENTITY_NOT_FOUND, userDto.getEmail());
     }

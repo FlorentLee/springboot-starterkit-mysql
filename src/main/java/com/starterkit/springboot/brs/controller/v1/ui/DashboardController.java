@@ -221,16 +221,4 @@ public class DashboardController {
         }
     }
 
-    @PostMapping(value = "/balance")
-    public ModelAndView addValue(@Valid @ModelAttribute("valueForm") ValueFormCommand valueFormCommand, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView("balance");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDto userDto = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("accountBalance", userDto.getAccountBalance());
-        if (!bindingResult.hasErrors()) {
-            userService.addValue(userDto, valueFormCommand.getNewValue());
-        }
-        return modelAndView;
-    }
-
 }

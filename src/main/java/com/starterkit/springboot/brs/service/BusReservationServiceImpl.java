@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -25,9 +26,7 @@ import java.util.stream.StreamSupport;
 import static com.starterkit.springboot.brs.exception.EntityType.*;
 import static com.starterkit.springboot.brs.exception.ExceptionType.*;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Component
 public class BusReservationServiceImpl implements BusReservationService {
     @Autowired
@@ -344,8 +343,8 @@ public class BusReservationServiceImpl implements BusReservationService {
                 }
                 tripScheduleRepository.save(tripSchedule.get());
 
-                user.setAccountBalance(user.getAccountBalance() - tripSchedule.get().getTripDetail().getFare());
-                if(user.getAccountBalance() < 0){
+                user.setAccountBalance(user.getAccountBalance().subtract(tripSchedule.get().getTripDetail().getFare()));
+                if(user.getAccountBalance().compareTo(BigDecimal.ZERO) < 0){
                     throw exception(USER, ENTITY_EXCEPTION, "");
                 }
                 userRepository.save(user);

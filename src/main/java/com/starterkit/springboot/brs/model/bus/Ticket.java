@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Created by Arpit Khandelwal.
@@ -39,5 +40,6 @@ public class Ticket {
     @JoinColumn(name = "user_id")
     private User passenger;
 
-    private int fare;
+    @Column(name = "journey_fare")
+    private BigDecimal fare;
 }

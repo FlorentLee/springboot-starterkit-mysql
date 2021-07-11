@@ -13,9 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Getter
 @Setter
 @Accessors(chain = true)
