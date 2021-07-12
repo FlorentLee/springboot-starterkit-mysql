@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 /**
  * Created by Arpit Khandelwal.
@@ -81,7 +82,9 @@ public class AdminController {
                 .setFirstName(adminSignupRequest.getFirstName())
                 .setLastName(adminSignupRequest.getLastName())
                 .setMobileNumber(adminSignupRequest.getMobileNumber())
-                .setAdmin(true);
+                .setAdmin(true)
+                .setAccountBalance(new BigDecimal(0));
+
         UserDto admin = userService.signup(userDto); //register the admin
         AgencyDto agencyDto = new AgencyDto()
                 .setName(adminSignupRequest.getAgencyName())

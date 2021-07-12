@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String mobileNumber;
-    private int accountBalance;
+    private BigDecimal accountBalance;
     private boolean isAdmin;
     private Collection<RoleDto> roles;
 

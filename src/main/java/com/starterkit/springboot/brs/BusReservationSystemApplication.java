@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -145,7 +146,7 @@ public class BusReservationSystemApplication {
                         .setDestStop(stopB)
                         .setBus(busA)
                         .setAgency(agencyA)
-                        .setFare(100)
+                        .setFare(BigDecimal.valueOf(100))
                         .setJourneyTime(60);
                 tripRepository.save(trip);
             }

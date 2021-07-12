@@ -339,13 +339,13 @@ public class BusReservationServiceImpl implements BusReservationService {
             if (tripSchedule.isPresent()) {
                 tripSchedule.get().setAvailableSeats(tripSchedule.get().getAvailableSeats() - 1);
                 if(tripSchedule.get().getAvailableSeats() < 0){
-                    throw exception(TRIPSCHEDULE, ENTITY_EXCEPTION, "");
+                    throw exception(TRIPSCHEDULE, ENTITY_EXCEPTION, "Seats are not available!");
                 }
                 tripScheduleRepository.save(tripSchedule.get());
 
                 user.setAccountBalance(user.getAccountBalance().subtract(tripSchedule.get().getTripDetail().getFare()));
                 if(user.getAccountBalance().compareTo(BigDecimal.ZERO) < 0){
-                    throw exception(USER, ENTITY_EXCEPTION, "");
+                    throw exception(USER, ENTITY_EXCEPTION, "Please add more value in your account!");
                 }
                 userRepository.save(user);
 

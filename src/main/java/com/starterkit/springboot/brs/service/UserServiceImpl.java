@@ -59,7 +59,8 @@ public class UserServiceImpl implements UserService {
                     .setRoles(new HashSet<>(Arrays.asList(userRole)))
                     .setFirstName(userDto.getFirstName())
                     .setLastName(userDto.getLastName())
-                    .setMobileNumber(userDto.getMobileNumber());
+                    .setMobileNumber(userDto.getMobileNumber())
+                    .setAccountBalance(userDto.getAccountBalance());
             return UserMapper.toUserDto(userRepository.save(user));
         }
         throw exception(USER, DUPLICATE_ENTITY, userDto.getEmail());

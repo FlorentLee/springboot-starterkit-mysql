@@ -3,8 +3,8 @@ package com.starterkit.springboot.brs.controller.v1.command;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
+import java.math.BigDecimal;
 
 /**
  * Created by Arpit Khandelwal.
@@ -24,6 +24,8 @@ public class TripFormCommand {
     @Positive
     private int tripDuration;
 
-    @Positive
-    private int tripFare;
+    @DecimalMin(value = "0", inclusive = false)
+    @DecimalMax(value = "1000", inclusive = false)
+    @Digits(integer=3, fraction=2)
+    private BigDecimal tripFare;
 }

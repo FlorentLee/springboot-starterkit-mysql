@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Component
 public class UserMapper {
 
@@ -21,6 +19,7 @@ public class UserMapper {
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
                 .setMobileNumber(user.getMobileNumber())
+                .setAccountBalance(user.getAccountBalance())
                 .setRoles(new HashSet<RoleDto>(user
                         .getRoles()
                         .stream()
